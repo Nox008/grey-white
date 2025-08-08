@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import type { Metadata } from 'next';
 
+// For generateStaticParams
 export async function generateStaticParams() {
   const projects = await fetchProjects();
   return projects.map((project) => ({
@@ -12,8 +13,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  // Properly await the params access
+// For generateMetadata
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const project = await fetchProjectBySlug(slug);
   
@@ -27,8 +28,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function ProjectDetailPage({ params }: { params: { slug: string } }) {
-  // Properly await the params access
+// For the page component - Option 1: Using async/await
+export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = await fetchProjectBySlug(slug);
 

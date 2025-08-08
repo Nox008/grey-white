@@ -15,7 +15,7 @@ const inter = Inter({
   variable: "--font-inter",
 });
 const playwrite = Playwrite_AU_NSW({ 
-  subsets: ["latin"],
+  /* subsets: ["latin"], */
   variable: "--font-playwrite",
   weight: "400",
 });
