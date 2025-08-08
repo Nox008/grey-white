@@ -5,37 +5,33 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import type { Metadata } from 'next';
 
-// Define a clear, reusable type for the component's props.
-// This resolves the type ambiguity during the build process.
-type Props = {
-  params: { slug: string };
-};
+export async function generateStaticParams() {
+  const projects = await fetchProjects();
+  return projects.map((project) => ({
+    slug: project.slug,
+  }));
+}
 
-// Use the new 'Props' type for generateMetadata
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const project = fetchProjectBySlug(params.slug);
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  // Properly await the params access
+  const { slug } = await params;
+  const project = await fetchProjectBySlug(slug);
+  
   if (!project) {
     return { title: "Project Not Found" };
   }
+  
   return {
     title: `${project.title} | Grey White Space Designs`,
     description: project.description,
   };
 }
 
-// This function is correct and does not need changes.
-export async function generateStaticParams() {
-  const projects = fetchProjects();
-  return projects.map((project) => ({
-    slug: project.slug,
-  }));
-}
+export default async function ProjectDetailPage({ params }: { params: { slug: string } }) {
+  // Properly await the params access
+  const { slug } = await params;
+  const project = await fetchProjectBySlug(slug);
 
-// Use the new 'Props' type for the page component
-export default function ProjectDetailPage({ params }: Props) {
-  const project = fetchProjectBySlug(params.slug);
-
-  // If project is not found, show the 404 page
   if (!project) {
     notFound();
   }
