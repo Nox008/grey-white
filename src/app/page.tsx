@@ -13,7 +13,7 @@ export default function HomePage() {
       <section className="bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 md:py-40 text-center">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-text-primary">
-            {`Designing Tomorrow's Spaces.`}
+            Designing Tomorrow&apos;s Spaces.
           </h1>
           <p className="mt-6 max-w-2xl mx-auto text-lg text-text-primary/80 font-sans">
             We are an architecture firm dedicated to creating buildings and spaces that inspire, function, and endure through minimalist design and thoughtful execution.
