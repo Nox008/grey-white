@@ -3,17 +3,16 @@
 import { fetchProjectBySlug, fetchProjects } from "@/lib/data";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import type { Metadata } from 'next';
 
-// Generate static paths for all projects
-export async function generateStaticParams() {
-  const projects = fetchProjects();
-  return projects.map((project) => ({
-    slug: project.slug,
-  }));
-}
+// Define a clear, reusable type for the component's props.
+// This resolves the type ambiguity during the build process.
+type Props = {
+  params: { slug: string };
+};
 
-// Generate metadata for the page
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+// Use the new 'Props' type for generateMetadata
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = fetchProjectBySlug(params.slug);
   if (!project) {
     return { title: "Project Not Found" };
@@ -24,8 +23,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
+// This function is correct and does not need changes.
+export async function generateStaticParams() {
+  const projects = fetchProjects();
+  return projects.map((project) => ({
+    slug: project.slug,
+  }));
+}
 
-export default function ProjectDetailPage({ params }: { params: { slug: string } }) {
+// Use the new 'Props' type for the page component
+export default function ProjectDetailPage({ params }: Props) {
   const project = fetchProjectBySlug(params.slug);
 
   // If project is not found, show the 404 page
