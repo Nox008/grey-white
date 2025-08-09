@@ -18,7 +18,7 @@ export function HeroSlideshow({ slides }: HeroSlideshowProps) {
 
   return (
     // Step 1: The main section is now the relative container for all layers.
-    <section className="relative embla h-screen md:h-[90vh] w-full">
+    <section className="relative embla h-[70vh] md:h-[90vh] w-full">
       
       {/* Layer 1: The Image Slideshow (at the bottom, z-0) */}
       <div className="embla__viewport h-full" ref={emblaRef}>
