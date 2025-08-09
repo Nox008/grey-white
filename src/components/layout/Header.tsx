@@ -5,6 +5,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -75,19 +76,27 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 bg-background/80 backdrop-blur-sm z-20 border-b border-border-accent">
+      <header className="sticky top-0 bg-background/80 backdrop-blur-sm z-[60] border-b border-border-accent">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Main flex container with gap for spacing */}
           <div className="flex items-center justify-between h-20 gap-4">
             
-            {/* Logo / Firm Name: now flexible and can shrink/truncate */}
+            {/* Logo / Firm Name: now an image */}
             <div className="flex-1 min-w-0">
-              <Link 
-                href="/" 
-                className="text-xl font-heading font-bold text-text-primary truncate"
+              <Link
+                href="/"
                 onClick={() => isMenuOpen && handleLinkClick()}
+                aria-label="Homepage"
               >
-                Grey White Space Designs
+                <Image
+                  // IMPORTANT: Replace with the path to your logo in the /public folder
+                  src="/logo.jpg" 
+                  alt="Grey White Space Designs Logo"
+                  width={160} // Set the intrinsic width of your logo
+                  height={32}  // Set the intrinsic height of your logo
+                  className="h-14 w-auto" // Control the display size with Tailwind CSS
+                  priority // Prioritize loading the logo as it's critical content
+                />
               </Link>
             </div>
             
@@ -124,7 +133,7 @@ export function Header() {
       {/* Mobile Menu Overlay */}
       <div 
         className={cn(
-          "fixed inset-0 z-10 bg-background transition-opacity duration-300 md:hidden",
+          "fixed inset-0 z-50 bg-background transition-opacity duration-300 md:hidden",
           isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         )}
       >

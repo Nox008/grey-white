@@ -23,3 +23,21 @@ h1, h2, h3 {
    /* Or apply with utilities like `font-heading` in your HTML */
   font-family: var(--font-heading);
 }
+
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  position: relative; /* Added for stacking context */
+  flex: 0 0 100%;
+  min-width: 0;
+  /* This creates the subtle cross-fade effect */
+  opacity: 1;
+  transition: opacity 1.5s ease-in-out;
+}
+.embla__slide.is-active {
+  opacity: 1;
+}

@@ -3,25 +3,17 @@
 import { fetchProjects } from "@/lib/data";
 import { ProjectCard } from "@/components/ui/Card";
 import Link from "next/link";
+import { HeroSlideshow } from "@/components/sections/HeroSlideshow"; // Import the new component
 
 export default function HomePage() {
-  const featuredProjects = fetchProjects().slice(0, 3); // Get first 3 projects as featured
+  const featuredProjects = fetchProjects().slice(0, 3);
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 md:py-40 text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-text-primary">
-            Designing Tomorrow&apos;s Spaces.
-          </h1>
-          <p className="mt-6 max-w-2xl mx-auto text-lg text-text-primary/80 font-sans">
-            We are an architecture firm dedicated to creating buildings and spaces that inspire, function, and endure through minimalist design and thoughtful execution.
-          </p>
-        </div>
-      </section>
+      {/* Dynamic Hero Slideshow */}
+      <HeroSlideshow slides={featuredProjects} />
 
-      {/* Featured Projects Section */}
+      {/* Featured Projects Section (remains the same) */}
       <section className="bg-foreground py-20 sm:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
