@@ -17,10 +17,9 @@ export function HeroSlideshow({ slides }: HeroSlideshowProps) {
   ]);
 
   return (
-    // Step 1: The main section is now the relative container for all layers.
-    <section className="relative embla h-[90vh] md:h-[90vh] w-full">
+    <section className="relative embla h-[100vh] md:h-screen w-full">
       
-      {/* Layer 1: The Image Slideshow (at the bottom, z-0) */}
+      {/* Layer 1: The Image Slideshow (base layer) */}
       <div className="embla__viewport h-full" ref={emblaRef}>
         <div className="embla__container h-full">
           {slides.map((project, index) => (
@@ -30,7 +29,6 @@ export function HeroSlideshow({ slides }: HeroSlideshowProps) {
                 alt={project.title}
                 fill
                 className="object-cover"
-                // Prioritize loading the very first image for good performance
                 priority={index === 0}
               />
             </div>
@@ -38,10 +36,10 @@ export function HeroSlideshow({ slides }: HeroSlideshowProps) {
         </div>
       </div>
 
-      {/* Layer 2: The dark overlay (sits on top of the images) */}
+      {/* ** FIX: Layer 2 z-index set to 10 */}
       <div aria-hidden="true" className="absolute inset-0 bg-black/50 z-10" />
 
-      {/* Layer 3: The static text content (sits on top of everything) */}
+      {/* ** FIX: Layer 3 z-index set to 20 to sit below the header (which is z-30) */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white p-4">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
           Designing Tomorrow&apos;s Spaces.

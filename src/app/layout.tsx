@@ -8,8 +8,9 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { cn } from "@/lib/utils";
+import { MainContentWrapper } from "@/components/layout/MainContentWrapper"; // 1. Import the new wrapper
 
-// Font configuration
+// Font configuration (no changes)
 const inter = Inter({ 
   subsets: ["latin"],
   variable: "--font-inter",
@@ -35,7 +36,10 @@ export default function RootLayout({
       <body className={cn("min-h-screen antialiased", inter.variable, playwrite.variable)}>
         <div className="flex flex-col min-h-screen">
           <Header />
-          <main className="flex-grow">{children}</main>
+          {/* 2. Replace the old <main> tag with our new wrapper component */}
+          <MainContentWrapper>
+            {children}
+          </MainContentWrapper>
           <Footer />
         </div>
       </body>
